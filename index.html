@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+
+<navbar class="navbar">
+
+<left-side-navbar >
+
+    <div class="left-navbar">
+        <div class="logo">
+            <img src="./imgs/logo.png">
+            <h4>Task Manager</h4>
+        </div>
+
+        <div class="left-nav-elements">
+            <ul class="left-elements-list">
+                <li id="dashboard-button" class="element"> <img src="./imgs/dashboard.png">Dashboard</li>
+                <li id = "board-button" class="element"> <img src="./imgs/board.png">Board</li>
+                <li id = "analytics-button" class="element"> <img src="./imgs/analytics.png">Analytics</li>
+                <li id = "settings-button" class="element"> <img src="./imgs/settings.png">Settings</li>
+            </ul>
+        </div>
+    </div>
+</left-side-navbar>
+
+
+<middle-navbar>
+
+<div class="middle-navbar">
+    <div class="search">
+        <img src="./imgs/search-line.png">
+        <input type="text" placeholder="Search for Notes">
+    </div>
+
+    <div class="nav-icons">
+        <img src="./imgs/notification-2-line.png">
+        <img class="dark-mode" src="./imgs/contrast-2-fill.png">
+        <img src="./imgs/user-line.png">
+    </div>
+</div>
+
+</middle-navbar>
+
+</navbar>
+
+
+
+
+<dashboard-page class="dashboard-page">
+
+<task-cards>
+    <h2 class="dashboard-title">Dashboard</h2>
+<div class="dashboard-container">
+
+    <div class="tasks-display">
+        <div class="completed-tasks">
+            <div class="inner-container">
+                <h3>Completed Tasks</h3>    
+                <img src="./imgs/more-2-line.png">
+            </div>
+            <img class = "task-icon" src="./imgs/task-line.png">
+            <p class="number-completed-tasks">0</p>
+            <button class="task-btn">View Tasks</button>
+        </div>
+    </div>
+
+    <div class="tasks-display">
+        <div class="in-progress-tasks">
+            <div class="inner-container">
+                <h3>Tasks in Progress</h3>
+                <img src="./imgs/more-2-line.png">
+            </div>
+            <img class = "task-icon" src="./imgs/bar-chart-grouped-line.png">
+            <p class="number-in-progress-tasks">0</p>
+            <button class="task-btn">View Tasks</button>
+        </div>
+    </div>
+
+    <div class="tasks-display">
+        <div class="all-tasks">
+            <div class="inner-container">
+                <h3>All Tasks</h3>
+                <img src="./imgs/more-2-line.png">
+            </div>
+            <img class = "task-icon" src="./imgs/list-check-3.png">
+            <p class="number-all-tasks">0</p>
+            <button class="task-btn">View Tasks</button>
+        </div>
+    </div>
+
+
+</div>
+</task-cards>
+
+<div class="vr-break"></div>
+
+<info-cards>
+
+<div class="info-cards">
+    <div class="cards-container">
+        <div class="first-card">
+            <h3>Create new task</h3>
+            <img src="./imgs/add-line.png">
+            <p>Creating a new task will redirect you to the board page</p>
+            <img class = "error" src="./imgs/error-warning-line.png">
+        </div>
+
+        <div class="hr-break1"></div>
+
+        <div class="second-card">
+            <h3>Create new draft</h3>
+            <img src="./imgs/add-line.png">
+            <p>Creating a new draft will redirect you to the board page</p>
+            <img class = "error" src="./imgs/error-warning-line.png">
+        </div>
+
+        <div class="hr-break2"></div>
+
+    </div>
+</div>
+</info-cards>
+
+
+ 
+<calendar-container>
+
+    <div class="container">
+        <div class="top-container">
+            <div class="text-content">
+                <span class="month"></span>
+                <span class="year"></span>
+            </div>
+
+            <div class="navigation-buttons">
+                <button>&#10094</button>
+                <button>&#10095</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="dates">
+            <li class="date">1</li>
+            <li class="date">2</li>
+            <li class="date">3</li>
+            <li class="date">4</li>
+            <li class="date">5</li>
+            <li class="date">6</li>
+            <li class="date">7</li>
+            <li class="date">8</li>
+            <li class="date">9</li>
+            <li class="date">10</li>
+            <li class="date">11</li>
+            <li class="date">12</li>
+            <li class="date">13</li>
+            <li class="date">14</li>
+            <li class="date">15</li>
+            <li class="date">16</li>
+            <li class="date">17</li>
+            <li class="date">18</li>
+            <li class="date">19</li>
+            <li class="date">20</li>
+            <li class="date">21</li>
+            <li class="date">22</li>
+            <li class="date">23</li>
+            <li class="date">24</li>
+            <li class="date">25</li>
+            <li class="date">26</li>
+            <li class="date">27</li>
+            <li class="date">28</li>
+            <li class="date">29</li>
+            <li class="date">30</li>
+            <li class="date">31</li>
+        </div>
+    </div>
+
+</calendar-container>
+
+
+</dashboard-page>
+
+<!--Board Page-->
+
+<to-do>
+
+<div class="board-container">
+    <div class="to-do-container">
+
+        <div class="title">
+            <h3>To do</h3>
+                <div>
+                    <img id="1" class="add-task" src="./imgs/add-line.png">
+                    <img src="./imgs/more-2-line.png">
+                </div>
+        </div>
+
+        <div class="to-do-tasks">
+            <div class="task-container">
+                <div>
+                    <h2 class="title">demo title</h2>
+                    <img id  = "img-1"class="edit-task" src="./imgs/more-2-line.png">
+                    <options class="options">
+                        <ul>
+                            <li>Edit</li>
+                            <li>Delete</li>
+                        </ul>
+                    </options>
+                </div>
+                <p class="task-description">description</p>
+            </div>
+
+        </div>
+
+       
+
+
+    </div>
+
+    <div class="in-progress-container">
+
+        <div class="title">
+            <h3>In progress</h3>
+                <div>
+                    <img id="2" class="add-task" src="./imgs/add-line.png">
+                    <img src="./imgs/more-2-line.png">
+                </div>
+        </div>
+
+        <div class="in-progress">
+            <div class="task-container-2">
+                <div>
+                    <h2 class="title">demo title</h2>
+                    <img class="edit-task" id = "img-2" src='./imgs/more-2-line.png'>
+
+                   
+
+                </div>
+                <p class="task-description">description</p>
+            </div>
+        </div>
+
+        
+
+
+    </div>
+
+    <div class="done-container">
+
+        <div class="title">
+            <h3>Done</h3>
+            <div>
+                <img id="3" class="add-task" src="./imgs/add-line.png">
+                <img src="./imgs/more-2-line.png">
+            </div>
+        </div>
+
+        <div class="done-tasks">
+            <div class="task-container-3">
+                <div>
+                    <h2 class="title">demo title</h2>
+                    <img class="edit-task" id = "img-3" src="./imgs/more-2-line.png">
+
+                    
+
+                </div>
+                <p 
+                class="task-description">description</p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+</to-do>
+
+
+
+
+
+
+
+    
+
+
+</body>
+</html>
