@@ -582,7 +582,6 @@ calendar-container .container{
 }
 .options-display {
     display: flex;
-    z-index: 100;
 } .options ul {
     list-style: none;
 }.options ul li{
