@@ -79,10 +79,10 @@ function addTask () {
             })
         }
 
-        addTaskToParent();
+        return addTaskToParent();
         function addTaskToParent () {
+            
             newButton.addEventListener('click', () => {
-
                 if (addBtnID === '1'){
                     const parent1 = document.querySelector('.to-do-container');
                     const originalTaskContainer = document.querySelector('.to-do-tasks');
@@ -100,6 +100,9 @@ function addTask () {
 
                     const descriptionInput = newDescription.value;
                     const taskDescription = cloneTask.querySelector('p');
+                    const editTaskButton = cloneTask.querySelector('.edit-task')
+
+                    editTaskButton.id += (Math.random() * 198);
 
                     taskDescription.innerText = descriptionInput;
 
@@ -127,7 +130,9 @@ function addTask () {
 
                     const descriptionInput = newDescription.value;
                     const taskDescription = cloneTask.querySelector('p');
+                    const editTaskButton = cloneTask.querySelector('.edit-task')
 
+                    editTaskButton.id += (Math.random() * 198);
                     taskDescription.innerText = descriptionInput;
 
                     parent1.appendChild(cloneTask);
@@ -150,12 +155,16 @@ function addTask () {
 
                     const descriptionInput = newDescription.value;
                     const taskDescription = cloneTask.querySelector('p');
+                    const editTaskButton = cloneTask.querySelector('.edit-task')
 
+                    editTaskButton.id += (Math.random() * 198);
                     taskDescription.innerText = descriptionInput;
 
                     parent1.appendChild(cloneTask);
                     document.body.removeChild(newDiv)
                 }
+                
+                editTask();
 
             })
 
@@ -208,14 +217,16 @@ editTask();
 function editTask () {
     const editTaskButton = document.querySelectorAll('.edit-task');
     editTaskButton.forEach(btn => btn.addEventListener('click', (event) => {
-
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
         const menuOptions = document.querySelector('.options');
-        if(event.currentTarget.id === 'img-1'){
-            menuOptions.classList.toggle('options-display')
-        } else if(event.currentTarget.id === 'img-2'){
-            menuOptions.classList.toggle('options-display')
-            menuOptions.style.marginLeft = '500px';
-        }
+        
+        menuOptions.style.left = mouseX + 'px';
+        menuOptions.style.top = mouseY + 'px';
+        menuOptions.classList.toggle('options-display');
+
+            
+        deleteTask(event.currentTarget.id);
 
 
     }))
@@ -223,19 +234,26 @@ function editTask () {
     }
 
 
+    function deleteTask(targetid) {
+        const deleteButton = document.querySelector('.delete');
 
+        deleteButton.addEventListener('click', () => {
+            let targetElement = document.getElementById(targetid)
+                let parent = targetElement.parentNode;
+                let grandparent = parent.parentNode;
+                let greatGrandParent = grandparent.parentNode;
+                let ultraparent = greatGrandParent.parentNode
+                ultraparent.removeChild(greatGrandParent);
+                
+                
+            
 
-function menuOptions (button) {
-    const menuOptions = document.querySelector('.options');
-
-
-
-    if(button.id === 'img-1'){
-        return
-    } else if(button.id === 'img-2'){
-        menuOptions.style.marginLeft = '500px';
+        })
+    
+  
     }
-}
+
+
 
 darkMode()
 function darkMode () {

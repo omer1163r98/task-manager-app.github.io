@@ -441,7 +441,7 @@ calendar-container .container{
     align-items: center;
     justify-content: space-between;
 }
-.task-container-2 #img-2{
+.task-container-2 .edit-task{
     width: 25px;
     transform: rotate(90deg);
     cursor: pointer;
@@ -491,7 +491,7 @@ calendar-container .container{
     align-items: center;
     justify-content: space-between;
 }
-.task-container-3 div #img-3{
+.task-container-3 div .edit-task{
     width: 25px;
     transform: rotate(90deg);
     cursor: pointer;
@@ -574,11 +574,15 @@ calendar-container .container{
     align-items: center;
     justify-content: center; 
     position:absolute;
-    margin-left: 260px;
-    margin-top: 70px;   
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+       
 }
 .options-display {
     display: flex;
+    z-index: 100;
 } .options ul {
     list-style: none;
 }.options ul li{
