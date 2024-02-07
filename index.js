@@ -79,7 +79,7 @@ function addTask () {
             })
         }
 
-        return addTaskToParent();
+        addTaskToParent();
         function addTaskToParent () {
             
             newButton.addEventListener('click', () => {
@@ -107,7 +107,9 @@ function addTask () {
                     taskDescription.innerText = descriptionInput;
 
                     parent1.appendChild(cloneTask);
-                    document.body.removeChild(newDiv)
+                    document.body.removeChild(newDiv);
+
+
                     
                     
                 }
@@ -136,7 +138,10 @@ function addTask () {
                     taskDescription.innerText = descriptionInput;
 
                     parent1.appendChild(cloneTask);
-                    document.body.removeChild(newDiv)
+                    document.body.removeChild(newDiv);
+                    
+
+
                 }
                 else{
                     const parent1 = document.querySelector('.done-container');
@@ -161,12 +166,13 @@ function addTask () {
                     taskDescription.innerText = descriptionInput;
 
                     parent1.appendChild(cloneTask);
-                    document.body.removeChild(newDiv)
-                }
-                
+                    document.body.removeChild(newDiv);
+
+                } 
                 editTask();
 
             })
+
 
             updateDashboard();
 
@@ -205,6 +211,7 @@ function addTask () {
         
     }))
 
+
 }
 
 viewTasksOnDashboard();
@@ -213,26 +220,38 @@ function viewTasksOnDashboard () {
     viewTasksButton.forEach(btn => btn.addEventListener('click', openBoard))
 }
 
-editTask();
+editTask()
 function editTask () {
     const editTaskButton = document.querySelectorAll('.edit-task');
     editTaskButton.forEach(btn => btn.addEventListener('click', (event) => {
+        alert('edit task feature is still in progress;')
+        event.preventDefault(); // Prevent default behavior
+        event.stopPropagation();
         const mouseX = event.clientX;
-        const mouseY = event.clientY;
+        const mouseY = event.clientY;        
         const menuOptions = document.querySelector('.options');
-        
+
         menuOptions.style.left = mouseX + 'px';
         menuOptions.style.top = mouseY + 'px';
-        menuOptions.classList.toggle('options-display');
 
-            
+        if (menuOptions.classList.contains('options-display')) {
+            menuOptions.classList.remove('options-display');
+        } else {
+            menuOptions.classList.add('options-display');
+        }
+        
+        console.log(event.currentTarget.id)
         deleteTask(event.currentTarget.id);
 
 
     }))
-        
     }
 
+    
+    
+
+  
+    
 
     function deleteTask(targetid) {
         const deleteButton = document.querySelector('.delete');
@@ -252,6 +271,10 @@ function editTask () {
     
   
     }
+   
+
+
+   
 
 
 
