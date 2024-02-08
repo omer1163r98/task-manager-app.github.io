@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer></script>
+    <script  src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -24,7 +25,7 @@
             <ul class="left-elements-list">
                 <li id="dashboard-button" class="element"> <img src="./imgs/dashboard.png">Dashboard</li>
                 <li id = "board-button" class="element"> <img src="./imgs/board.png">Board</li>
-                <li id = "analytics-button" class="element"> <img src="./imgs/analytics.png">Analytics</li>
+                <li id = "analytics-button" class="element"> <img src="./imgs/analytics.png" id="analytics-button">Analytics</li>
                 <li id = "settings-button" class="element"> <img src="./imgs/settings.png">Settings</li>
             </ul>
         </div>
@@ -192,7 +193,7 @@
 <to-do>
 
 <div class="board-container">
-    <div class="to-do-container">
+    <div id ="to-do-container" class="to-do-container">
 
         <div class="title">
             <h3>To do</h3>
@@ -284,7 +285,7 @@
 </to-do>
 
 
-
+<!--options for when you will want to delete a task-->
 <div class="options">
     <ul>
         <li class="edit">Edit</li>
@@ -293,8 +294,16 @@
 </div>
 
 
+<analytics-page class="analytics-page">
 
-    
+<h1>analytics</h1>
+
+
+
+
+</analytics-page>
+<canvas id="myChart"></canvas>
+
 
 
 </body>

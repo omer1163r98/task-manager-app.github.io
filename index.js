@@ -1,10 +1,12 @@
 const dashboard = document.getElementById('dashboard-button');
 const dashboardPage = document.querySelector('.dashboard-page');
 const board = document.getElementById('board-button');
-const boardPage = document.querySelector('.board-container')
+const boardPage = document.querySelector('.board-container');
+const analytics = document.getElementById('analytics-button');
+const analyticsPage = document.querySelector('.analytics-page')
 
 
-
+document.addEventListener('DOMContentLoaded', openDashboard() );
 
 
 
@@ -14,7 +16,8 @@ dashboard.addEventListener('click', openDashboard)
 // opens the dashboard if pressed in the left navbar
 board.addEventListener('click', openBoard)
 
-
+// opens the analytics if pressed in the left navbar
+analytics.addEventListener('click', openAnalytics)
 
 
 function openDashboard() {
@@ -22,7 +25,10 @@ function openDashboard() {
         boardPage.style.display = 'none';
         dashboard.style.opacity = '100%';
         board.style.opacity = '70%';
-
+        analytics.style.opacity = '70%'
+        analyticsPage.style.display = 'none';
+        const canvas = document.getElementById('myChart')
+        canvas.style.display = 'none';
 
 
 
@@ -33,9 +39,32 @@ function openBoard () {
         board.style.opacity = '100%';
         dashboard.style.opacity = '70%';
         dashboardPage.style.display = 'none';
+        analytics.style.opacity = '70%';
+        analyticsPage.style.display = 'none';
+        const canvas = document.getElementById('myChart')
+        canvas.style.display = 'none';
+        hideFirstTask('.to-do-tasks')
+        hideFirstTask('.in-progress')
+        hideFirstTask('.done-tasks')
+        
+        
+
 
 }
 
+function openAnalytics() {
+    boardPage.style.display = 'none';
+    board.style.opacity = '70%';
+    dashboard.style.opacity = '70%';
+    dashboardPage.style.display = 'none';
+    analyticsPage.style.display = 'block';
+    analytics.style.opacity = '100%';
+    const canvas = document.getElementById('myChart')
+    canvas.style.display = 'block';
+    updateChartData();
+    
+
+}
 
 
 
@@ -89,7 +118,7 @@ function addTask () {
                     const cloneTask = originalTaskContainer.cloneNode(true);
                     cloneTask.className = 'to-do-tasks';
 
-
+                    
                     // add the title that the user inputs into the new task container
                     const titleInput = newTitle.value;
                     const taskTitle = cloneTask.querySelector('h2');
@@ -108,6 +137,9 @@ function addTask () {
 
                     parent1.appendChild(cloneTask);
                     document.body.removeChild(newDiv);
+                    hideFirstTask('.to-do-tasks')
+                  
+                    
 
 
                     
@@ -140,6 +172,7 @@ function addTask () {
                     parent1.appendChild(cloneTask);
                     document.body.removeChild(newDiv);
                     
+                    hideFirstTask('.in-progress')
 
 
                 }
@@ -167,9 +200,11 @@ function addTask () {
 
                     parent1.appendChild(cloneTask);
                     document.body.removeChild(newDiv);
+                    hideFirstTask('.done-tasks')
 
                 } 
                 editTask();
+
 
             })
 
@@ -205,12 +240,13 @@ function addTask () {
 
                     
                 }
+               
            
                 }
         } 
         
     }))
-
+ 
 
 }
 
@@ -220,11 +256,12 @@ function viewTasksOnDashboard () {
     viewTasksButton.forEach(btn => btn.addEventListener('click', openBoard))
 }
 
-editTask()
+/*editTask()
 function editTask () {
     const editTaskButton = document.querySelectorAll('.edit-task');
     editTaskButton.forEach(btn => btn.addEventListener('click', (event) => {
-        alert('edit task feature is still in progress;')
+        //alert('edit task feature is still in progress;')
+
         event.preventDefault(); // Prevent default behavior
         event.stopPropagation();
         const mouseX = event.clientX;
@@ -246,6 +283,40 @@ function editTask () {
 
     }))
     }
+*/
+
+function editTask() {
+    const editTaskButtons = document.querySelectorAll('.edit-task');
+    
+    // First, remove any existing event listeners
+    editTaskButtons.forEach(btn => {
+        btn.removeEventListener('click', editTaskClickHandler);
+    });
+
+    // Then, attach the event listener only once
+    editTaskButtons.forEach(btn => {
+        btn.addEventListener('click', editTaskClickHandler);
+
+    
+    });
+}
+
+function editTaskClickHandler(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    const menuOptions = document.querySelector('.options');
+
+    menuOptions.style.left = mouseX + 'px';
+    menuOptions.style.top = mouseY + 'px';
+
+    menuOptions.classList.toggle('options-display');
+
+    console.log(event.currentTarget.id);
+    deleteTask(event.currentTarget.id, menuOptions);
+}
 
     
     
@@ -253,16 +324,20 @@ function editTask () {
   
     
 
-    function deleteTask(targetid) {
+    function deleteTask(targetid, optionContainer) {
         const deleteButton = document.querySelector('.delete');
 
         deleteButton.addEventListener('click', () => {
             let targetElement = document.getElementById(targetid)
                 let parent = targetElement.parentNode;
+                console.log(parent)
                 let grandparent = parent.parentNode;
                 let greatGrandParent = grandparent.parentNode;
-                let ultraparent = greatGrandParent.parentNode
+                let ultraparent = greatGrandParent.parentNode;
+                
                 ultraparent.removeChild(greatGrandParent);
+                optionContainer.classList.toggle('options-display');
+        
                 
                 
             
@@ -312,6 +387,41 @@ function darkMode () {
 
 
 
+function updateChartData() {
+    const inProgTasks = document.getElementsByClassName('in-progress').length -1;
+    const doneTasks = document.getElementsByClassName('done-tasks').length -1;
+    
+    // Update chart data
+    myChart.data.datasets[0].data = [inProgTasks, doneTasks];
+    
+    // Update the chart
+    myChart.update();
+}
+
+// Get the context of the canvas element
+const canvas = document.getElementById('myChart').getContext('2d');
+
+const myChart = new Chart(canvas, {
+    type: 'pie', // Type of chart (e.g., 'line', 'bar', 'doughnut')
+    data: {
+        labels: ['In Progress', 'Completed Tasks'],
+        datasets: [{
+            label: 'Tasks',
+            data: [0, 0], // Chart data
+            backgroundColor: ['rgb(204, 255, 252)',  
+            'rgb(238, 204, 255)'],
+            // Background color for bars
+            borderColor: 'purple', // Border color for bars
+            borderWidth: 1, // Border width for bars
+            
+        }]
+    },
+    options: {
+
+                }
+        // Chart options (e.g., title, legend, tooltips)
+    
+});
 
 
 
@@ -334,6 +444,26 @@ function darkMode () {
 
 
 
+
+
+
+function hideFirstTask (container){
+    let tskContainer = container
+    const taskContainer = document.querySelectorAll(tskContainer);
+    taskContainer.forEach((task, index) => {
+        if(index === 0){
+            task.style.display = 'none'
+        }
+        else{
+            task.style.display = "block"
+        }
+        
+
+        }
+    
+    ) 
+    
+}
 
 
 
